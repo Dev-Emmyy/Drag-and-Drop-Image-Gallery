@@ -1,0 +1,96 @@
+body {
+    color: #fff;
+}
+
+.bg_img {
+    background-image: url("/src/components/Bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container_one {
+    margin-left: 50px;
+}
+
+.heading_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading_title {
+    font-size: 45px;
+    font-weight: lighter;
+}
+
+.heading_p {
+    font-size: 18px;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.heading_title,
+.heading_p,
+.profile {
+    margin: 0;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.container_two {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 12.5% 100px;
+    width: 300px;
+}
+
+.container_two_heading {
+    margin-bottom: 20px;
+}
+
+.container_two_heading p {
+    font-size: 30px;
+}
+
+.input_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.input_container label {
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input_container input {
+    border: none ;
+    border-bottom: 2px solid #fff ;
+    background-color: transparent ;
+    outline: none ;
+}
+
+.container_two button {
+    border: none;
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.container_two button:hover {
+    transition: 2s ease;
+    background-color: #fff;
+    color: red;
+}
