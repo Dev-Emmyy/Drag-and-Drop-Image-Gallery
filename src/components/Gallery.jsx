@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import "../Styles/gallery.css";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
@@ -70,19 +70,26 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 const Gallery = () => {
   const [imgcontainer, updateImageContainer] = useState(imagesList);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  function handleDragEnd(result) {
+  useEffect(() => {
+    // Simulate loading of images using a useEffect hook
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after a delay (simulating image loading)
+    }, 5000); // Adjust the delay time as needed
+  }, []);
+
+  const handleDragEnd = (result) => {
     const items = Array.from(imgcontainer);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     updateImageContainer(items);
-  }
+  };
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Filter images based on the search query
   const filteredImages = imgcontainer.filter(({ title }) =>
     title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -104,31 +111,33 @@ const Gallery = () => {
         <Droppable droppableId='img_container'>
           {(provided) => (
             <ul {...provided.droppableProps} ref={provided.innerRef} className='img_container'>
-              {filteredImages.map(({ id, title, image_path }, index) => {
-                return (
-                  <Draggable key={id} draggableId={id} index={index}>
-                    {(provided) => (
-                      <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <img src={image_path} alt={`${title} Image_path`} />
-                        <h4>{title}</h4>
-                      </li>
-                    )}
-                  </Draggable>
-                )
-              })}
+              {loading ? (
+                <div className="loading-spinner"></div>
+              ) : (
+                filteredImages.map(({ id, title, image_path }, index) => {
+                  return (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <img src={image_path} alt={`${title} Image_path`} />
+                          <h4>{title}</h4>
+                        </li>
+                      )}
+                    </Draggable>
+                  )
+                })
+              )}
               {provided.placeholder}
             </ul>
           )}
         </Droppable>
       </DragDropContext>
-
-       <div className="profile_link">
+      <div className="profile_link">
         <div className="terms">
           <p>Conditions of Use</p>
           <p>Privacy & Policy</p>
           <p>Press Room</p>
         </div>
-
         <div className="copyright">
           <p>© 2023 MovieBox Clone by Emmanuel Ugochukwu</p>
         </div>
