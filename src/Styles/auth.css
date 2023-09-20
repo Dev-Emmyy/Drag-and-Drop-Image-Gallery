@@ -113,6 +113,11 @@
 }
 
 @media screen and (max-width: 736px) {
+
+    .bg_img {
+        width: 100%;
+    }
+
     .container_one {
         margin-left: 5px;
     }
@@ -136,6 +141,14 @@
         width: 200px;
         font-weight: bolder;
         font-style: italic;
+    }
+
+    .input_container input {
+        border: none;
+        border-bottom: 2px solid #fff;
+        background-color: transparent;
+        outline: none;
+        width: 100px;
     }
 
     .profile {

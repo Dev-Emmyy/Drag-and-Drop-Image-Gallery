@@ -9,30 +9,35 @@ import { AiFillLinkedin, AiOutlineTwitter, AiFillGithub } from "react-icons/ai";
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(''); // State for email error
-  const [passwordError, setPasswordError] = useState(''); // State for password error
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
   const signin = async () => {
-    // Clear previous error messages
     setEmailError('');
     setPasswordError('');
 
     if (email === '') {
       setEmailError('Please input an email address');
-      return; // Exit the function if email is empty
+      return;
     }
 
     if (password === '') {
       setPasswordError('Please input a password');
-      return; // Exit the function if password is empty
+      return;
     }
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigate('/Gallery');
     } catch (error) {
-      console.error(error);
+      if (error.code === 'auth/wrong-password') {
+        setPasswordError('Incorrect password. Please try again.');
+      } else if (error.code === 'auth/user-not-found') {
+        setEmailError('User not found. Please check your email.');
+      } else {
+        console.error(error);
+      }
     }
   };
 
@@ -87,7 +92,6 @@ const Auth = () => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          {/* Display email error */}
           {emailError && <p className="error">{emailError}</p>}
         </div>
         <div className='input_container'>
@@ -97,10 +101,9 @@ const Auth = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* Display password error */}
           {passwordError && <p className="error">{passwordError}</p>}
         </div>
-            <button onClick={signin}>Sign In</button>
+        <button onClick={signin}>Sign In</button> 
       </div>
     </div>
   );
