@@ -139,7 +139,7 @@ const Gallery = () => {
           <p>Press Room</p>
         </div>
         <div className="copyright">
-          <p>© 2023 MovieBox Clone by Emmanuel Ugochukwu</p>
+          <p>© 2023 Gallery by Emmanuel Ugochukwu</p>
         </div>
       </div>
     </div>
