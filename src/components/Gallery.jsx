@@ -99,7 +99,7 @@ const Gallery = () => {
       <div className='input_content'>
         <input
           type="text"
-          placeholder='Search for an image'
+          placeholder='Search for an image here....'
           value={searchQuery}
           onChange={handleSearch}
         />
@@ -139,7 +139,7 @@ const Gallery = () => {
           <p>Press Room</p>
         </div>
         <div className="copyright">
-          <p>© 2023 Gallery by Emmanuel Ugochukwu</p>
+          <p>© 2023 Image Gallery by Emmanuel Ugochukwu</p>
         </div>
       </div>
     </div>
