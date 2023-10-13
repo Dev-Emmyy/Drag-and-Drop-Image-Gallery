@@ -104,10 +104,6 @@
         width: 100%;
     }
 
-    .container_one {
-        margin-left: 5px;
-    }
-
     .container_one img {
         width: 150px;
     }
@@ -134,24 +130,7 @@
         border-bottom: 2px solid #fff;
         background-color: transparent;
         outline: none;
-        width: 100px;
-    }
-
-    .profile {
-        display: flex;
-        justify-content: space-between;
-        width: 40%;
-    }
-
-    .container_two {
-        background-color: rgba(255, 255, 255, 0.2);
-        width: 70px;
-        padding: 0px 50px;
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100%;
-        z-index: 1;
+        width: 200px;
     }
 
     .container_two_heading {

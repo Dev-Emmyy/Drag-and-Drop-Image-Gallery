@@ -161,6 +161,26 @@ h4 {
         height: 400px;
     }
 
+    .input_contain {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .logout_container {
+        margin-top: 20px;
+    }
+
+    .input_content input {
+        border: none;
+        outline: none;
+        width: 200px;
+        background-color: transparent;
+        font-family: 'DM Sans', sans-serif;
+        color: #fff;
+    }
+
     .terms p {
         margin: 0px 10px;
         color: #8697bc;
