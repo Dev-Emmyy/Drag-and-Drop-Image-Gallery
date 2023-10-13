@@ -1,110 +1,91 @@
-import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; 
-import { auth } from '../config/firebase'; 
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState, useEffect, useRef } from 'react';
+import Gallery from './Gallery';
 import "../Styles/auth.css"
-import logo from "./Logo.png";
-import { AiFillLinkedin, AiOutlineTwitter, AiFillGithub } from "react-icons/ai";
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const navigate = useNavigate();
+    const name = useRef();
+    const email = useRef();
+    const password = useRef();
+    const [showHome, setShowHome] = useState (false);
+    const [show, setShow] = useState(false);
+    const localSignUp = localStorage.getItem("signUp"); 
+    const localEmail = localStorage.getItem("email"); 
+    const localName = localStorage.getItem("name"); 
+    const localPassword = localStorage.getItem("password"); 
 
-  const signin = async () => {
-    setEmailError('');
-    setPasswordError('');
 
-    if (email === '') {
-      setEmailError('Please input an email address');
-      return;
+     useEffect(() => {
+        if(localSignUp) {
+            setShowHome(true)
+        }
+        if (localEmail) {
+            setShow(true)
+        }
+    },[localSignUp, localEmail])
+
+    const handleClick = () => {
+        if (name.current.value&&email.current.value&&password.current.value) {
+            localStorage.setItem("name", name.current.value);
+            localStorage.setItem("email", email.current.value);
+            localStorage.setItem("password", password.current.value);
+            localStorage.setItem("signUp", email.current.value);
+            window.alert("Account created sucessfully!");
+            window.location.reload();
+        }
     }
 
-    if (password === '') {
-      setPasswordError('Please input a password');
-      return;
+    const handleSignIn = () => {
+        if (email.current.value === localEmail && password.current.value === localPassword) {
+            localStorage.setItem("signUp", email.current.value);
+            window.location.reload();
+        }
+        else {
+            alert("Please Enter valid credential")
+        }
     }
-
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/Gallery');
-    } catch (error) {
-      if (error.code === 'auth/wrong-password') {
-        setPasswordError('Incorrect password. Please try again.');
-      } else if (error.code === 'auth/user-not-found') {
-        setEmailError('User not found. Please check your email.');
-      } else {
-        console.error(error);
-      }
-    }
-  };
 
 
   return (
     <div className='bg_img'>
-      <div className='container_one'>
-        <img src={logo} alt='logo' width={200} />
-
-        <div className='heading_container'>
-          <p className='heading_title'>Don't have an account?</p>
-          <div className='heading_p'>
-            <p>Register to access all the features of this service.</p>
-            <p>You can also follow the socials below.</p>
-          </div>
-          <div className="profile">
-            <a href="https://www.linkedin.com/in/ugochukwu-emmanuel-ba798a25a/">
-              <AiFillLinkedin
-                color="fff"
-                fontSize={24}
-                cursor="pointer"
-                fontWeight="bolder"
-              />
-            </a>
-            <a href="https://twitter.com/9Gunna9">
-              <AiOutlineTwitter
-                color="fff"
-                fontSize={24}
-                fontWeight="bolder"
-              />
-            </a>
-            <a href="https://github.com/Dev-Emmyy">
-              <AiFillGithub
-                color="fff"
-                fontSize={24}
-                cursor="pointer"
-                fontWeight="bolder"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className='container_two'>
+      {showHome? <Gallery/> :
+      (show? 
+        <div className='container_two'>
          <div className='container_two_heading'>
           <p>Sign In</p>
         </div>
+        <div className='container_two_heading'>
+          <h1>Hello {localName}</h1>
+        </div>
         <div className='input_container'>
           <label htmlFor="email">E-mail</label>
-          <input
-            id="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {emailError && <p className="error">{emailError}</p>}
+          <input placeholder='Email' type='email' ref={email} />
         </div>
         <div className='input_container'>
           <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {passwordError && <p className="error">{passwordError}</p>}
+          <input placeholder='Password' type='password' ref={password} />
         </div>
-        <button onClick={signin}>Sign In</button> 
+        <button onClick={handleSignIn}>Sign In</button> 
       </div>
+      :
+      <div className='container_two'>
+        <div className='container_two_heading'>
+          <p>Sign Up</p>
+        </div>
+        <div className='input_container'>
+          <label htmlFor="email">Full Name</label>
+          <input placeholder='Name' type='text' ref={name} />
+        </div>
+        <div className='input_container'>
+          <label htmlFor="email">E-mail</label>
+          <input placeholder='Email' type='email' ref={email} />
+        </div>
+        <div className='input_container'>
+          <label htmlFor="password">Password</label>
+          <input placeholder='Password' type='password' ref={password} />
+        </div>
+        <button onClick={handleClick}>Sign Up</button> 
+      </div>)
+      }
     </div>
   );
 };

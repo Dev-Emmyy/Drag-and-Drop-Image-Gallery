@@ -1,18 +1,11 @@
 
 .bg_img {
-    background-image: url("/src/components/Bg.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     min-height: 100vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     color: #fff;
-}
-
-.container_one {
-    margin-left: 50px;
+    background-color: black;
 }
 
 .heading_container {
@@ -45,17 +38,8 @@
 
 .container_two {
     background-color: rgba(255, 255, 255, 0.2);
-    width: 400px;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    padding: 0 40px;
+    padding: 25px;
+    border-radius: 5px;
 }
 
 .container_two_heading {
@@ -84,6 +68,8 @@
     border-bottom: 2px solid #fff;
     background-color: transparent;
     outline: none;
+    color: #FFF;
+    width: 400px;
 }
 
 .input_container input::placeholder {
