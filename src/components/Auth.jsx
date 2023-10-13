@@ -73,15 +73,15 @@ const Auth = () => {
         </div>
         <div className='input_container'>
           <label htmlFor="email">Full Name</label>
-          <input placeholder='Name' type='text' ref={name} />
+          <input placeholder='Name' type='text' ref={name} autoComplete='off' />
         </div>
         <div className='input_container'>
           <label htmlFor="email">E-mail</label>
-          <input placeholder='Email' type='email' ref={email} />
+          <input placeholder='Email' type='email' ref={email} autoComplete='off' />
         </div>
         <div className='input_container'>
           <label htmlFor="password">Password</label>
-          <input placeholder='Password' type='password' ref={password} />
+          <input placeholder='Password' type='password' ref={password} autoComplete='off' />
         </div>
         <button onClick={handleClick}>Sign Up</button> 
       </div>)
